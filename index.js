@@ -5,9 +5,13 @@ require('dotenv').config();
 const express = require('express'); // Web framework for Node.js
 const mongoose = require('./configs/mongoose'); // MongoDB config file is called to initiate DB connection
 const defaultLog=require('./middlewares/defaultLog')
+const cors = require('cors');
 
 // Create an instance of the Express application
 const app = express();
+
+// Enable CORS for all routes
+app.use(cors());
 
 // Use middleware to parse incoming requests
 app.use(express.json()); // Parse JSON requests
