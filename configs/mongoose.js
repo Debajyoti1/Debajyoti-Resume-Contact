@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const MONGOOSE_URI=process.env.MONGOOSE_URI || 'mongodb://localhost:27017/todo_app'
+const MONGOOSE_URI=process.env.MONGOOSE_URI || 'mongodb://localhost:27017/test'
 
 mongoose.connect(MONGOOSE_URI)
 
