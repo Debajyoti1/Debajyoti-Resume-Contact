@@ -6,7 +6,7 @@ module.exports.formSubmit = async (req, res) => {
             throw new Error('Metod Not Allowed')
         }
         const { name, email, message } = req.body
-        const ip =  req.headers['X-Real-IP'] || req.connection.remoteAddress
+        const ip =  req.headers['x-real-ip'] || req.connection.remoteAddress
         const header = req.headers
         let msg = await Message.create({
             name: name,

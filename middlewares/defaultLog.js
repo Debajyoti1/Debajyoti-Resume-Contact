@@ -10,7 +10,7 @@ module.exports.defaultLog = (req, res, next) => {
         second: '2-digit',
         fractionalSecondDigits: 3
     });
-    let ip=req.headers['X-Real-IP'] || req.connection.remoteAddress
+    let ip=req.headers['x-real-ip'] || req.connection.remoteAddress
     logger.info(`${formattedDate} - ${ip} '${req.path}' ${req.method}`)
     next()
 }
