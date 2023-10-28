@@ -8,7 +8,7 @@ RUN npm install
 
 RUN apk add --no-cache gcc musl-dev linux-headers
 
-RUN apt-get update && apt-get upgrade && apt-get install -y nano
+RUN apt update && apt upgrade && apt install -y nano
 
 EXPOSE 8000
 
