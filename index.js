@@ -23,8 +23,9 @@ app.use(defaultLog.defaultLog)
 // Import and use routes defined in separate modules
 app.use('/', require('./routes'));
 
-let key = fs.readFileSync('/certificates/certificate.crt','utf-8')
-let cert = fs.readFileSync('/certificates/private.key','utf-8')
+let cert = fs.readFileSync('/certificates/certificate.crt','utf-8')
+let key = fs.readFileSync('/certificates/private.key','utf-8')
+
 const parameters = {
   key: key,
   cert: cert
