@@ -8,7 +8,7 @@ RUN npm install
 
 RUN apk add --no-cache gcc musl-dev linux-headers
 
-RUN apk update && apk upgrade -y
+RUN apk update && apk upgrade --no-cache
 
 EXPOSE 8000
 
