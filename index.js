@@ -1,39 +1,38 @@
-// Load environment variables from .env file
 require('dotenv').config();
-
-// Import required modules
-const express = require('express'); // Web framework for Node.js
-const https = require('https')
-const fs = require('fs')
-const mongoose = require('./configs/mongoose'); // MongoDB config file is called to initiate DB connection
-const defaultLog=require('./middlewares/defaultLog')
+const express = require('express');
+const https = require('https');
+const http = require('http');
+const fs = require('fs');
+const mongoose = require('./configs/mongoose');
+const defaultLog = require('./middlewares/defaultLog');
 const cors = require('cors');
 
-// Create an instance of the Express application
 const app = express();
-
-// Enable CORS for all routes
 app.use(cors());
-
-// Use middleware to parse incoming requests
-app.use(express.json()); // Parse JSON requests
-app.use(express.urlencoded({ extended: true })); // Parse URL-encoded requests
-app.use(defaultLog.defaultLog)
-
-// Import and use routes defined in separate modules
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(defaultLog.defaultLog);
 app.use('/', require('./routes'));
 
-let cert = fs.readFileSync('/certificates/certificate.crt','utf-8')
-let key = fs.readFileSync('/certificates/private.key','utf-8')
+// HTTP setup
+const httpPort = process.env.HTTP_PORT || 8000;
+const httpServer = http.createServer(app);
 
-const parameters = {
+httpServer.listen(httpPort, () => {
+  console.log(`HTTP Server started on port ${httpPort}`);
+});
+
+// HTTPS setup
+const httpsPort = process.env.HTTPS_PORT || 8443;
+const cert = fs.readFileSync('/certificates/certificate.crt', 'utf-8');
+const key = fs.readFileSync('/certificates/private.key', 'utf-8');
+const httpsParams = {
   key: key,
   cert: cert
-}
+};
 
-const port = process.env.PORT || 8000; // Use the port defined in the environment variable, or default to port 8000
+const httpsServer = https.createServer(httpsParams, app);
 
-let server = https.createServer(parameters,app)
-server.listen(port, () => {
-  console.log(`Server started on port ${port}`);
+httpsServer.listen(httpsPort, () => {
+  console.log(`HTTPS Server started on port ${httpsPort}`);
 });

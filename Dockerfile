@@ -11,5 +11,5 @@ RUN apk add --no-cache gcc musl-dev linux-headers
 RUN apk update && apk upgrade --no-cache
 
 EXPOSE 8000
-
+EXPOSE 8001
 CMD npm start
