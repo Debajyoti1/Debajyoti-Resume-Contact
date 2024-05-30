@@ -1,6 +1,5 @@
 require('dotenv').config();
 const express = require('express');
-const https = require('https');
 const http = require('http');
 const fs = require('fs');
 const mongoose = require('./configs/mongoose');
@@ -22,17 +21,3 @@ httpServer.listen(httpPort, () => {
   console.log(`HTTP Server started on port ${httpPort}`);
 });
 
-// HTTPS setup
-const httpsPort = process.env.HTTPS_PORT || 8443;
-const cert = fs.readFileSync('/certificates/certificate.crt', 'utf-8');
-const key = fs.readFileSync('/certificates/private.key', 'utf-8');
-const httpsParams = {
-  key: key,
-  cert: cert
-};
-
-const httpsServer = https.createServer(httpsParams, app);
-
-httpsServer.listen(httpsPort, () => {
-  console.log(`HTTPS Server started on port ${httpsPort}`);
-});

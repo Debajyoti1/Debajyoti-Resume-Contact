@@ -6,7 +6,4 @@ services:
       - "8000"
     ports:
       - "8130:8000"
-      - "8131:8001"
-    volumes:
-      - /root/nginx/certificates:/certificates
     restart: always
